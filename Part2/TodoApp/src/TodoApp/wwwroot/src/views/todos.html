@@ -1,0 +1,20 @@
+﻿<template>
+    <require from="../../src/components/date-format"></require>
+    <div class="panel panel-default">
+        <div class="panel-heading">Todo List</div>
+        <table class="table">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Due Date</th>
+                <th></th>
+            </tr>
+            <tr repeat.for="todoItem of todoItems">
+                <td></td>
+                <td>${todoItem.name}</td>
+                <td>${todoItem.dueDate | dateFormat}</td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</template>
