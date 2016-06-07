@@ -24,6 +24,7 @@ namespace TodoApp.Controllers
 
         // GET api/todos/2
         [HttpGet("{id}")]
+		[Route("{id}", Name = "GetTodoItemByIdRoute")]
         public TodoItem Get(int id)
         {
             return Repo.GetTodoItemById(id);
