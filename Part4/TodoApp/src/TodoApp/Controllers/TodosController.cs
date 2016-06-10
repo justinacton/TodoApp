@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using TodoApp.Data;
 using TodoApp.Models;
@@ -49,5 +50,41 @@ namespace TodoApp.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public IActionResult Delete(string id)
+        {
+            try
+            {
+                var idTodoItem = int.Parse(id, CultureInfo.InvariantCulture);
+                if (Repo.GetTodoItemById(idTodoItem) == null) return NotFound();
+                Repo.DeleteTodoItem(idTodoItem);
+                return new StatusCodeResult(200);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public IActionResult Put(string id)
+        {
+            try
+            {
+                var idTodoItem = int.Parse(id, CultureInfo.InvariantCulture);
+                if (Repo.GetTodoItemById(idTodoItem) == null) return NotFound();
+                Repo.MarkTodoItemAsDone(idTodoItem);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
     }
 }

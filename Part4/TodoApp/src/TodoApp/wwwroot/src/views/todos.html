@@ -13,12 +13,12 @@
                 <th>Due Date</th>
                 <th></th>
             </tr>
-            <tr repeat.for="todoItem of todoItems">
-                <td><input type="checkbox" value.bind="todoItem.isCompleted"></td>
+            <tr repeat.for="todoItem of todoItems" style.bind="todoItem.isCompleted === false ? 'background:fuchsia' : 'background:springgreen; color:antiquewhite'">
+                <td><input type="checkbox" checked.bind="todoItem.isCompleted" click.delegate="markTodoItemAsDone(todoItem)"></td>
                 <td>${todoItem.name}</td>
                 <td>${todoItem.dueDate | dateFormat}</td>
                 <td>
-                    <a class="btn btn-default btn-sm" aria-label="Left Align">
+                    <a click.delegate="deleteTodoItem(todoItem.id)" class="btn btn-default btn-sm" aria-label="Left Align">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </a>
                 </td>

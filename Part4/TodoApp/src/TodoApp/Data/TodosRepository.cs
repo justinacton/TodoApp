@@ -47,5 +47,15 @@ namespace TodoApp.Data
             todoItems.Add(todoItem);
             return newId;
         }
+
+        public void DeleteTodoItem(int id)
+        {
+            todoItems.Remove(todoItems.Single(x => x.Id == id));
+        }
+
+        public void MarkTodoItemAsDone(int id)
+        {
+            todoItems.Single(x => x.Id == id).IsCompleted = true;
+        }
     }
 }

@@ -1,4 +1,4 @@
-System.register(["aurelia-framework", "aurelia-fetch-client", "fetch"], function(exports_1, context_1) {
+System.register(["aurelia-framework", "aurelia-fetch-client"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -19,8 +19,7 @@ System.register(["aurelia-framework", "aurelia-fetch-client", "fetch"], function
             },
             function (aurelia_fetch_client_1_1) {
                 aurelia_fetch_client_1 = aurelia_fetch_client_1_1;
-            },
-            function (_1) {}],
+            }],
         execute: function() {
             Todos = (function () {
                 function Todos(http) {
@@ -49,6 +48,16 @@ System.register(["aurelia-framework", "aurelia-fetch-client", "fetch"], function
                         then(function (response) { return response.json(); }).then(function (data) {
                         _this.todoItems = data;
                     });
+                };
+                Todos.prototype.deleteTodoItem = function (todoItemId) {
+                    var _this = this;
+                    this.http.fetch("http://localhost:60384/api/todos/" + todoItemId, { method: "delete" }).then(function () { _this.fetchAllTodoItems(); });
+                };
+                Todos.prototype.markTodoItemAsDone = function (todoItem) {
+                    var _this = this;
+                    if (todoItem.isCompleted)
+                        return;
+                    this.http.fetch("http://localhost:60384/api/todos/" + todoItem.id, { method: "put" }).then(function () { _this.fetchAllTodoItems(); });
                 };
                 Todos = __decorate([
                     aurelia_framework_1.inject(aurelia_fetch_client_1.HttpClient, aurelia_fetch_client_1.json), 

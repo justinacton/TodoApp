@@ -34,6 +34,17 @@ export class Todos {
                 this.todoItems = data;
             });
     }
+
+    deleteTodoItem(todoItemId) {
+        this.http.fetch(`http://localhost:60384/api/todos/${todoItemId}`,
+            { method: "delete" }).then(() => { this.fetchAllTodoItems(); });
+    }
+
+    markTodoItemAsDone(todoItem: ITodoItem) {
+        if (todoItem.isCompleted) return;
+        this.http.fetch(`http://localhost:60384/api/todos/${todoItem.id}`,
+            { method: "put" }).then(() => { this.fetchAllTodoItems(); });
+    }
 }
 
 export interface ITodoItem {
